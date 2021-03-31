@@ -5,7 +5,7 @@ from logging import Handler, LogRecord
 
 __all__ = ["QWhaleLogsHandler"]
 
-SERVICE_URL = "http://127.0.0.1:8000/"
+SERVICE_URL = "https://logs.qwhale.ml/"
 
 
 class QWhaleLogsHandler(Handler):
