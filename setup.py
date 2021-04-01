@@ -24,7 +24,7 @@ setup(
         "client",
         "Logs",
         "log",
-        "logs"
+        "logs",
     ],  # Keywords that define your package best
     install_requires=["requests"],  # I get to this in a second
     classifiers=[

@@ -1,16 +1,16 @@
 # QWhaleLogsClient
-#### QWhaleLogs client lib for saving logs in remote service
+## QWhaleLogs client lib for saving logs in remote service
 
-#### Install
+### Install
 ```shell script
 $> pip install qwhale-logs-client
 ```
 
-#### Get token
+### Get token
 Go to https://logs.qwhale.ml/provider/login
 After the login go to https://logs.qwhale.ml/api/token
 
-#### Logging example
+### Logging example
 ```python
 import logging
 from qwhale_logs_client import QWhaleLogsHandler
@@ -25,7 +25,7 @@ logger.info("Some log") # Normal use
 # Now your logs are sent to the QWhaleLogsService
 ```
 
-#### Loguru example (Recommended)
+### Loguru example (Recommended)
 ```python
 from loguru import logger
 from qwhale_logs_client import QWhaleLogsHandler

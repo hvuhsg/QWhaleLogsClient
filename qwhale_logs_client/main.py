@@ -1,8 +1,9 @@
-import requests
 from concurrent.futures.thread import ThreadPoolExecutor
 from json import dumps
-from urllib.parse import urljoin
 from logging import Handler, LogRecord
+from urllib.parse import urljoin
+
+import requests
 
 __all__ = ["QWhaleLogsHandler"]
 
@@ -21,8 +22,12 @@ class QWhaleLogsHandler(Handler):
     def __upload(self):
         payload = {"token": self.token}
         try:
-            requests.put(urljoin(SERVICE_URL, f"/api/logs"), params=payload, data=dumps({"logs": self.batch}))
-        except (ConnectionError, ValueError) as EX:
+            requests.put(
+                urljoin(SERVICE_URL, "/api/logs"),
+                params=payload,
+                data=dumps({"logs": self.batch})
+            )
+        except (ConnectionError, ValueError):
             pass
 
     def emit(self, record: LogRecord) -> None:
