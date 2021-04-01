@@ -1,4 +1,5 @@
 import requests
+from concurrent.futures.thread import ThreadPoolExecutor
 from json import dumps
 from urllib.parse import urljoin
 from logging import Handler, LogRecord
@@ -14,6 +15,7 @@ class QWhaleLogsHandler(Handler):
         self.logs = []
         self.batch = None
         self.batch_size = batch_site
+        self.executor = ThreadPoolExecutor(max_workers=5)
         super().__init__()
 
     def __upload(self):
@@ -28,4 +30,4 @@ class QWhaleLogsHandler(Handler):
         if len(self.logs) >= self.batch_size:
             self.batch = self.logs.copy()
             self.logs.clear()
-            self.__upload()
+            self.executor.submit(self.__upload)
