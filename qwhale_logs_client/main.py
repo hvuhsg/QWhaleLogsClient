@@ -31,3 +31,10 @@ class QWhaleLogsHandler(Handler):
             self.batch = self.logs.copy()
             self.logs.clear()
             self.executor.submit(self.__upload)
+
+    def flush(self) -> None:
+        self.executor.submit(self.__upload)
+
+    def close(self) -> None:
+        super().close()
+        self.executor.shutdown()
