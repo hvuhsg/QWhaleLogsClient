@@ -41,5 +41,6 @@ class QWhaleLogsHandler(Handler):
         self.__upload()
 
     def close(self) -> None:
+        self.flush()
         super().close()
         self.executor.shutdown()
