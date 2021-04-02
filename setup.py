@@ -7,7 +7,7 @@ setup(
     name="qwhale_logs_client",
     packages=["qwhale_logs_client"],
     include_package_data=True,
-    version="v0.1.5",
+    version="v0.1.6",
     license="MIT",
     description="Python client for QwhaleLogs API",
     long_description=long_description,
