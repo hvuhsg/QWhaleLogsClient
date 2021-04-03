@@ -7,8 +7,8 @@ $> pip install qwhale-logs-client
 ```
 
 ### Get token
-Go to https://logs.qwhale.ml/provider/login
-After the login go to https://logs.qwhale.ml/api/token
+Go to [login](https://logs.qwhale.ml/provider/login)
+After the login go to [get_token](https://logs.qwhale.ml/api/token)
 
 ### Logging example
 ```python
