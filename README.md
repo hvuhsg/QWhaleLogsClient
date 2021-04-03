@@ -13,24 +13,24 @@ After the login go to https://logs.qwhale.ml/api/token
 ### Logging example
 ```python
 import logging
-from qwhale_logs_client import QWhaleLogsHandler
+from qwhale_logs_client import init
 
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-logger = logging.getLogger("SimpleOne")
-logger.addHandler(QWhaleLogsHandler(token="<YOUR_TOKEN>", batch_site=1))  # Add our logs handler
+init(token="<YOUR_TOKEN>", batch_site=1)  # Init logs capture
 # The batch site is determine how many logs to send in one request
 # For fewer sizes more requests are made (default to 100)
 
-logger.info("Some log") # Normal use
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+logging.info("Some log") # Normal use
 # Now your logs are sent to the QWhaleLogsService
 ```
 
 ### Loguru example (Recommended)
 ```python
 from loguru import logger
-from qwhale_logs_client import QWhaleLogsHandler
+from qwhale_logs_client import init
 
-logger.add(QWhaleLogsHandler(token="<You'r-Token>", batch_site=1))
+init(token="<YOUR_TOKEN>", batch_site=1)  # Init logs capture
 # The batch site is determine how many logs to send in one request
 # For fewer sizes more requests are made (default to 100)
 

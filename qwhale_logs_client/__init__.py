@@ -1,3 +1,3 @@
-from .main import QWhaleLogsHandler
+from .main import QWhaleLogsHandler, init
 
-__all__ = ["QWhaleLogsHandler"]
+__all__ = ["QWhaleLogsHandler", "init"]
