@@ -6,6 +6,7 @@ from urllib.parse import urljoin
 
 try:
     import loguru
+
     HAS_LOGURU = True
 except ImportError:
     HAS_LOGURU = False
