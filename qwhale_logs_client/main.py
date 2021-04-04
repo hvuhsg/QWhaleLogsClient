@@ -19,7 +19,9 @@ SERVICE_URL = "https://logs.qwhale.ml/"
 
 
 class QWhaleLogsHandler(Handler):
-    def __init__(self, token: str, batch_site: int = 100, timeout: float = 7.5, **kwargs):
+    def __init__(
+            self, token: str, batch_site: int = 100, timeout: float = 7.5, **kwargs
+    ):
         self.token = token
         self.logs = []
         self.batch = None
