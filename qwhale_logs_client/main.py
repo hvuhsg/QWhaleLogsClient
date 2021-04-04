@@ -20,9 +20,10 @@ SERVICE_URL = "https://logs.qwhale.ml/"
 
 class QWhaleLogsHandler(Handler):
     def __init__(
-            self, token: str, batch_site: int = 100, timeout: float = 7.5, **kwargs
+            self, token: str, batch_site: int = 100, timeout: float = 7.5, project: str = "main", **kwargs
     ):
         self.token = token
+        self.project = project
         self.logs = []
         self.batch = None
         self.batch_size = batch_site
@@ -31,7 +32,7 @@ class QWhaleLogsHandler(Handler):
         super().__init__()
 
     def __upload(self):
-        payload = {"token": self.token}
+        payload = {"token": self.token, "project": self.project}
         try:
             requests.put(
                 urljoin(SERVICE_URL, "/api/logs"),
@@ -60,8 +61,16 @@ class QWhaleLogsHandler(Handler):
         self.executor.shutdown()
 
 
-def init(token: str, batch_size: int = 100, **kwargs):
-    handler = QWhaleLogsHandler(token, batch_size=batch_size, **kwargs)
+def init(token: str, batch_size: int = 100, project: str = "main", **kwargs) -> None:
+    """
+
+    :param token: service token (For Authentication)
+    :param batch_size: (How much to send in one batch)
+    :param project: The project name for multiple project on the same token
+    :param kwargs: timeout and more ...
+    :return: None
+    """
+    handler = QWhaleLogsHandler(token, batch_size=batch_size, project=project, **kwargs)
     if HAS_LOGURU:
         loguru.logger.add(handler)
     logging.root.addHandler(handler)
