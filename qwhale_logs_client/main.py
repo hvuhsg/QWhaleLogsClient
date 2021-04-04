@@ -40,7 +40,6 @@ class QWhaleLogsHandler(Handler):
             pass
 
     def emit(self, record: LogRecord) -> None:
-        print(record)
         self.logs.append(record.__dict__)
         if len(self.logs) >= self.batch_size:
             self.batch = self.logs.copy()
