@@ -63,6 +63,5 @@ def init(token: str, batch_size: int = 100, **kwargs):
         loguru.logger.add(handler)
     logging.root.addHandler(handler)
     for name, logger in logging.Logger.manager.loggerDict.items():
-        print(name)
         if isinstance(logger, logging.Logger):
             logger.addHandler(handler)
