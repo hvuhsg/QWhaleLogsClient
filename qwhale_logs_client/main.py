@@ -1,3 +1,4 @@
+from traceback import format_exc
 import logging
 from concurrent.futures.thread import ThreadPoolExecutor
 from json import dumps
@@ -49,6 +50,10 @@ class QWhaleLogsHandler(Handler):
             pass
 
     def emit(self, record: LogRecord) -> None:
+        if not isinstance(record.msg, str):
+            record.msg = str(record.msg)
+        if record.exc_info and (not isinstance(record.exc_info, str)):
+            record.exc_info = format_exc(limit=20)
         self.logs.append(record.__dict__)
         if len(self.logs) >= self.batch_size:
             self.batch = self.logs.copy()
