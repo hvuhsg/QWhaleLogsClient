@@ -50,11 +50,20 @@ class QWhaleLogsHandler(Handler):
             pass
 
     def emit(self, record: LogRecord) -> None:
+        record_msg = None
+        record_exc_info = None
         if not isinstance(record.msg, str):
-            record.msg = str(record.msg)
+            record_msg = str(record.msg)
         if record.exc_info and (not isinstance(record.exc_info, str)):
-            record.exc_info = format_exc(limit=20)
-        self.logs.append(record.__dict__)
+            record_exc_info = format_exc(limit=20)
+
+        record_dict = record.__dict__.copy()
+        if record_msg is not None:
+            record_dict["msg"] = record_msg
+        if record_exc_info is not None:
+            record_dict["exc_info"] = record_exc_info
+
+        self.logs.append(record_dict)
         if len(self.logs) >= self.batch_size:
             self.batch = self.logs.copy()
             self.logs.clear()
