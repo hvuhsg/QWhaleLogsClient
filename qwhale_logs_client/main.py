@@ -23,7 +23,7 @@ class QWhaleLogsHandler(Handler):
     def __init__(
         self,
         token: str,
-        batch_site: int = 100,
+        batch_size: int = 100,
         timeout: float = 7.5,
         project: str = "main",
         **kwargs
@@ -32,7 +32,7 @@ class QWhaleLogsHandler(Handler):
         self.project = project
         self.logs = []
         self.batch = None
-        self.batch_size = batch_site
+        self.batch_size = batch_size
         self.timeout = timeout
         self.executor = ThreadPoolExecutor(max_workers=5)
         super().__init__()
